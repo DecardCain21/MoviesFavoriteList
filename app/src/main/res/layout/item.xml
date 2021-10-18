@@ -12,20 +12,21 @@
     android:paddingBottom="3dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image"
+        android:id="@+id/filmone"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         tools:src="@drawable/filmone" />
 
     <TextView
+        android:id="@+id/tvname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/separator_middle"
         android:layout_marginStart="12dp"
-        android:layout_toEndOf="@+id/image"
+        android:layout_toEndOf="@+id/filmone"
         android:lineSpacingExtra="-9.5sp"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="normal"
         tools:text="xXx: Return of Xander Cage (2017)" />
@@ -39,38 +40,38 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/starone"
-        android:layout_width="20.8dp"
-        android:layout_height="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16.5dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
         android:adjustViewBounds="true"
         tools:src="@drawable/star_icon" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/eyeone"
-        android:layout_width="20.5dp"
-        android:layout_height="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="49dp"
-        android:adjustViewBounds="true"
-        tools:src="@drawable/eye_1" />
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toStartOf="@id/starone"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/eye_1" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="210dp"
         android:layout_height="16.5dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
         android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@id/filmone"
+
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/ivimdbone"
             android:layout_width="34.5dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="87.5dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/download" />
 
         <TextView
@@ -78,17 +79,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="9.3dp"
+            android:layout_marginStart="9.3dp"
             android:text="7.2"
-            android:textColor="#ffffff"
-            android:textSize="10sp"></TextView>
+            android:textColor="@color/white"
+            android:textSize="10sp" />
 
         <ImageView
             android:id="@+id/ivimdbtwo"
             android:layout_width="34.5dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="22dp"
-            android:layout_weight="1"
             app:srcCompat="@drawable/download_copy" />
 
         <TextView
@@ -96,17 +96,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp"
             android:text="9.1"
-            android:textColor="#ffffff"
-            android:textSize="10sp"></TextView>
+            android:textColor="@color/white"
+            android:textSize="10sp" />
 
         <ImageView
             android:id="@+id/ivmetacritic"
             android:layout_width="16.5dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="21.5dp"
-            android:layout_weight="1"
+            android:layout_marginStart="21.5dp"
             app:srcCompat="@drawable/metacritic_svg" />
 
         <TextView
@@ -114,11 +113,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="7.3dp"
-            android:layout_marginRight="79dp"
+            android:layout_marginStart="7.3dp"
             android:text="8.3"
-            android:textColor="#ffffff"
-            android:textSize="10sp"></TextView>
+            android:textColor="@color/white"
+            android:textSize="10sp" />
 
 
     </LinearLayout>
