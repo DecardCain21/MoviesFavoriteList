@@ -18,6 +18,7 @@
         android:adjustViewBounds="true"
         tools:src="@drawable/filmone" />
 
+    <!--для поддержки на старых телефонах используется класс AppCompatTextView,класс для обратной совместимости,тег "app" для библиотеки-->
     <TextView
         android:id="@+id/tvname"
         android:layout_width="wrap_content"
@@ -29,7 +30,9 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="normal"
+        android:fontFamily="@font/myriad_satan"
         tools:text="xXx: Return of Xander Cage (2017)" />
+    <!--fontFamily метод поддерживается с 8 версии андроида-->
 
     <View
         android:id="@+id/separator_middle"
