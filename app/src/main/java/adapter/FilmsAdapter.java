@@ -1,7 +1,6 @@
 package adapter;
 
 import android.content.Context;
-import android.os.TestLooperManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import com.marat.hvatit.tupit.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Objfilm;
 
@@ -34,6 +32,21 @@ public class FilmsAdapter extends BaseAdapter {
 
     }
 
+    //Создание вложенного класса ViewHolder,для реализации одноименного паттерна
+    private class ViewHolder {
+        final ImageView imageholder;
+        final TextView imdboneholder, imdbtwoholder, metacriticholder, nameholder;
+
+        //Создание конструктора класса,с присвоением ссылок на макет
+        private ViewHolder(View view) {
+            imdboneholder = view.findViewById(R.id.tvamdbone);
+            imdbtwoholder = view.findViewById(R.id.tvamdbtwo);
+            metacriticholder = view.findViewById(R.id.tvmetacritic);
+            nameholder = view.findViewById(R.id.tvname);
+            imageholder = view.findViewById(R.id.filmone);
+        }
+    }
+
     //Реализация методов родителя,класса BaseAdapter
     //Получение значения массива данных
     @Override
@@ -53,8 +66,36 @@ public class FilmsAdapter extends BaseAdapter {
         return position;
     }
 
-    //Реализация основого метода адаптера, формирование элемента списка
     @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        //Создание экземпляра вложенного класса ViewHolder
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            //раздутие объекта convertView на кастомном макете item.xml
+            convertView = layoutInflater.inflate(R.layout.item, parent, false);
+            //инициализация объекта класса ViewHolder
+            viewHolder = new ViewHolder(convertView);
+            //применение метода класса View,который позволяет связать представление с объектом
+            convertView.setTag(viewHolder);
+        } else {
+            //получение представления,данных textView,imageView?
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        //Создание временного объекта по позиции в массиве для привязки
+        Objfilm p = getObjfilm(position);
+
+        viewHolder.nameholder.setText(p.getName());
+        viewHolder.imdboneholder.setText(String.valueOf(p.getimdbone()));
+        viewHolder.imdbtwoholder.setText(String.valueOf(p.getimdbtwo()));
+        viewHolder.metacriticholder.setText(String.valueOf(p.getmetacritic()));
+        viewHolder.imageholder.setImageResource(p.getImage());
+
+        //Возвращает convertView элемент с привязкой
+        return convertView;
+    }
+
+    //Реализация основого метода адаптера, формирование элемента списка
+   /* @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //convertView,для оптимизации прокрутки(не создавать новые view,а переиспользовать имеющиеся)
         View view = convertView;
@@ -75,7 +116,8 @@ public class FilmsAdapter extends BaseAdapter {
 
         //Возвращает view элемент с привязкой
         return view;
-    }
+    }*/
+
 
     public Objfilm getObjfilm(int position) {
         return (Objfilm) getItem(position);
