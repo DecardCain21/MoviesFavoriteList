@@ -33,10 +33,14 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar)findViewById(R.id.mytoolbar));
         //create Adapter
         initFilms();
+        //Инициализация кастомного адаптера,контекст,массив данных который нужно внедрить в виджет
+        //обычно второй параметр это указанние макета для раздутия,но он указан в кастомном адаптере
         filmsAdapter = new FilmsAdapter(this, testlistfilms);
         //config list
         ListView lvMain = (ListView) findViewById(R.id.listoffilms);
         lvMain.setAdapter(filmsAdapter);
+        //вариант короткой записи,для одноразового теста самое то
+        //lvMain.setAdapter(new FilmsAdapter(this,testlistfilms));
     }
 
 

@@ -72,9 +72,10 @@ public class FilmsAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             //раздутие объекта convertView на кастомном макете item.xml
+            //получение View элемента из файла item.xml,считывание атрибутов у convertView
             convertView = layoutInflater.inflate(R.layout.item, parent, false);
             //инициализация объекта класса ViewHolder
-            viewHolder = new ViewHolder(convertView);
+            viewHolder = new ViewHolder(convertView);//!!!#0 что в скобках?
             //применение метода класса View,который позволяет связать представление с объектом
             convertView.setTag(viewHolder);
         } else {
