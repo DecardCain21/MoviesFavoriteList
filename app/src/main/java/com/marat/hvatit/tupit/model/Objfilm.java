@@ -1,9 +1,4 @@
-package model;
-
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
-import model.interfaces.Iobjfilm;
+package com.marat.hvatit.tupit.model;
 
 public class Objfilm {
     //Создание переменных класса
@@ -14,6 +9,16 @@ public class Objfilm {
     private int imdbone;
     private int imdbtwo;
     private int metacritic;
+    //создание флажка
+    private boolean favorite;
+    //public method for Provider
+    public boolean isFavorite() {
+        return favorite;
+    }
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     //Номер изображения,превью для каждого объекта
     private int image;
 
@@ -24,6 +29,7 @@ public class Objfilm {
         this.imdbtwo = imdbtwo;
         this.metacritic = metacritic;
         this.image = image;
+        this.favorite = favorite;
     }
 
 

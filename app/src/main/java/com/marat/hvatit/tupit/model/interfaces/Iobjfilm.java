@@ -1,4 +1,4 @@
-package model.interfaces;
+package com.marat.hvatit.tupit.model.interfaces;
 
 public interface Iobjfilm {
     String name = null;

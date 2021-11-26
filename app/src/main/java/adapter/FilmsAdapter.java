@@ -12,7 +12,7 @@ import com.marat.hvatit.tupit.R;
 
 import java.util.ArrayList;
 
-import model.Objfilm;
+import com.marat.hvatit.tupit.model.Objfilm;
 
 public class FilmsAdapter extends BaseAdapter {
     //Какого хуя тут делает контекст,и почему так?
@@ -60,6 +60,10 @@ public class FilmsAdapter extends BaseAdapter {
         return objfilmslist.get(position);
     }
 
+    public int getViewTypeCount(int position) {
+        return (objfilmslist.get(position).isFavorite()) ? 1 : 2;
+    }
+
     //Без заморочек с Id,почему?
     @Override
     public long getItemId(int position) {
@@ -73,9 +77,14 @@ public class FilmsAdapter extends BaseAdapter {
         if (convertView == null) {
             //раздутие объекта convertView на кастомном макете item.xml
             //получение View элемента из файла item.xml,считывание атрибутов у convertView
-            convertView = layoutInflater.inflate(R.layout.item, parent, false);
+
+            if (getViewTypeCount(position) == 1) {
+                convertView = layoutInflater.inflate(R.layout.item, parent, false);
+            } else {
+                convertView = layoutInflater.inflate(R.layout.mirror_item, parent, false);
+            }
             //инициализация объекта класса ViewHolder
-            viewHolder = new ViewHolder(convertView);//!!!#0 что в скобках?
+            viewHolder = new ViewHolder(convertView);//View нужна чтоб я мог внутри ViewHolder-а использовать ее элементы из XML разметки,сетить
             //применение метода класса View,который позволяет связать представление с объектом
             convertView.setTag(viewHolder);
         } else {
