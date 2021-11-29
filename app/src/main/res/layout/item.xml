@@ -41,14 +41,14 @@
         android:layout_centerInParent="true"
         android:background="@color/background" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageButton
         android:id="@+id/starone"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="3dp"
         android:adjustViewBounds="true"
-        tools:src="@drawable/star_icon" />
+        android:src="@drawable/star_icon" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/eyeone"

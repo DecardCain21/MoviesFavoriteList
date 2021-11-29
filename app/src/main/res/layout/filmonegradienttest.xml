@@ -14,7 +14,7 @@
         tools:layout_editor_absoluteY="1dp">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/filmone"
+            android:id="@+id/filmonexy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"

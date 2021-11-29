@@ -18,6 +18,9 @@ import java.util.ArrayList;
 
 import com.marat.hvatit.tupit.model.Objfilm;
 
+import static com.marat.hvatit.tupit.model.Objfilm.FAVORITE;
+import static com.marat.hvatit.tupit.model.Objfilm.NEW;
+
 public class AnotherAdapter extends BaseAdapter {
     Context ctx;
     ArrayList<Objfilm> objfilmslist;
@@ -34,9 +37,11 @@ public class AnotherAdapter extends BaseAdapter {
     private class ViewHolder {
         final ImageView imageholder;
         final TextView imdboneholder, imdbtwoholder, metacriticholder, nameholder;
+        View root;
 
 
         private ViewHolder(View view) {
+            root = view;
             imdboneholder = view.findViewById(R.id.tvamdbone);
             imdbtwoholder = view.findViewById(R.id.tvamdbtwo);
             metacriticholder = view.findViewById(R.id.tvmetacritic);
@@ -57,7 +62,7 @@ public class AnotherAdapter extends BaseAdapter {
     }
 
     public int getViewTypeCount(int position) {
-        return (objfilmslist.get(position).isFavorite()) ? 1 : 2;
+        return (objfilmslist.get(position).isFavorite()) ? NEW : FAVORITE;
     }
 
 
@@ -71,35 +76,27 @@ public class AnotherAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
 
-            if (getViewTypeCount(position) == 1) {
-                viewHolder = createNewVh(parent);
+            if (getViewTypeCount(position) == NEW) {
+                viewHolder = createViewHolder(parent,R.layout.item);
             } else {
-                viewHolder = createMirrorVh(parent);
+                viewHolder = createViewHolder(parent,R.layout.mirror_item);
             }
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         bindView(viewHolder, position);
-        return convertView;
+        return viewHolder.root;
     }
 
     @NonNull
-    private ViewHolder createNewVh(final ViewGroup parent) {
+    private ViewHolder createViewHolder(final ViewGroup parent,final int layout) {
         ViewHolder viewHolder;
-        View view = layoutInflater.inflate(R.layout.item, parent, false);
+        View view = layoutInflater.inflate(layout, parent, false);
         viewHolder = new ViewHolder(view);
         view.setTag(viewHolder);
         return viewHolder;
     }
 
-    @NonNull
-    private ViewHolder createMirrorVh(final ViewGroup parent) {
-        ViewHolder viewHolder;
-        View view = layoutInflater.inflate(R.layout.mirror_item, parent, false);
-        viewHolder = new ViewHolder(view);
-        view.setTag(viewHolder);
-        return viewHolder;
-    }
 
     private void bindView(final ViewHolder viewHolder, final int position) {
         final Objfilm film = getObjfilm(position);

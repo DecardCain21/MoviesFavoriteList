@@ -11,7 +11,10 @@ public class Objfilm {
     private int metacritic;
     //создание флажка
     private boolean favorite;
+    public static int NEW = 1;
+    public static int FAVORITE =2;
     //public method for Provider
+
     public boolean isFavorite() {
         return favorite;
     }
@@ -29,7 +32,7 @@ public class Objfilm {
         this.imdbtwo = imdbtwo;
         this.metacritic = metacritic;
         this.image = image;
-        this.favorite = favorite;
+        this.favorite = false;
     }
 
 
@@ -73,5 +76,9 @@ public class Objfilm {
 
     public int setmetacritic(int metacritic) {
         return this.metacritic;
+    }
+
+    public int getType(){
+        return isFavorite() ? NEW: FAVORITE;
     }
 }
