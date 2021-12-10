@@ -14,6 +14,7 @@ import adapter.AnotherAdapter;
 import adapter.FilmsAdapter;
 import adapter.RecycleAdapter;
 
+import com.marat.hvatit.tupit.model.GeneretorFilm;
 import com.marat.hvatit.tupit.model.Provider;
 import com.marat.hvatit.tupit.model.Objfilm;
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public ArrayList<Objfilm> initFilms() {
-        Provider somf = new Provider();
-        return somf.generetefilm(10);
+        Provider somf = new GeneretorFilm(20);
+        return somf.getData();
     }
 }

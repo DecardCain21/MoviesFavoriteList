@@ -27,15 +27,16 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         this.objfilmslist = listfilms;
     }
 
-    public int getViewType(int position) {
+    @Override
+    public int getItemViewType(int position) {
         return (objfilmslist.get(position).isFavorite()) ? NEW : FAVORITE;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int position) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        ViewHolder viewHolder;
-        if (getViewType(position) == NEW) {
+        if (viewType == NEW) {
             View vNew = layoutInflater.inflate(R.layout.item, parent, false);
             viewHolder = new ViewHolder(vNew);
         } else {
