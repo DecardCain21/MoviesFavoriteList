@@ -1,5 +1,7 @@
 package com.marat.hvatit.tupit.model;
 
+import android.widget.TextView;
+
 public class Objfilm {
     //Создание переменных класса
 
@@ -9,6 +11,13 @@ public class Objfilm {
     private int imdbone;
     private int imdbtwo;
     private int metacritic;
+    //Создание Id объекта фильм
+    private String filmId;
+    //Создание описания фильма
+    private String annotation;
+    public void setAnnotation(String annotation) {
+        this.annotation = annotation;
+    }
     //создание флажка
     private boolean favorite;
     public static int NEW = 1;

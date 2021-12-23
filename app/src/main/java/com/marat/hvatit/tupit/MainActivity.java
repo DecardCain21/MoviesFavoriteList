@@ -1,47 +1,63 @@
 package com.marat.hvatit.tupit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import adapter.AnotherAdapter;
-import adapter.FilmsAdapter;
 import adapter.RecycleAdapter;
 
-import com.marat.hvatit.tupit.model.GeneretorFilm;
-import com.marat.hvatit.tupit.model.Provider;
-import com.marat.hvatit.tupit.model.Objfilm;
+import com.marat.hvatit.tupit.model.FilmCollectionStore;
 
 public class MainActivity extends AppCompatActivity {
-    AnotherAdapter anotherAdapter;
     RecycleAdapter adapter;
+    GridView gridView;
+    ImageButton gridButton;
+    ArrayAdapter<String> adapterGrid;
+    LinearLayoutManager linearLayoutManager;
+    GridLayoutManager gridLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Инициализация кастомного адаптера,контекст,массив данных который нужно внедрить в виджет
-        //обычно второй параметр это указанние макета для раздутия,но он указан в кастомном адаптере
-        //Adapter update
-        //anotherAdapter = new AnotherAdapter(this,initFilms());
-       /* ListView lvMain = (ListView) findViewById(R.id.listoffilms);
-        lvMain.setAdapter(anotherAdapter);*/
         RecyclerView recyclerView = findViewById(R.id.listoffilms);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        //Создание коллекции
+        FilmCollectionStore store = new FilmCollectionStore();
         // настроить RecyclerView
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new RecycleAdapter(this, initFilms());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //Получение коллекции и её данных в адаптере
+        adapter = new RecycleAdapter(this, store.getCollection());
         recyclerView.setAdapter(adapter);
+        gridButton = (ImageButton) findViewById(R.id.imagegrid);
+        gridButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(recyclerView.getLayoutManager()==linearLayoutManager) {
+                    recyclerView.setLayoutManager(gridLayoutManager);
+                    recyclerView.setAdapter(adapter);
+                }
+                else{
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+        });
     }
 
-
-    public ArrayList<Objfilm> initFilms() {
-        Provider somf = new GeneretorFilm(20);
-        return somf.getData();
-    }
 }

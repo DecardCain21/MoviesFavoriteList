@@ -1,6 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/testgridview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:columnCount="5"
+    android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/gridtvname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/separator_middle"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@+id/filmone"
+            android:lineSpacingExtra="-9.5sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="normal"
+            android:fontFamily="@font/myriad_pro"
+            tools:text="xXx: Return of Xander Cage (2017)" />
+
+    <ImageButton
+        android:id="@+id/starone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/star_icon" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/eyeone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toStartOf="@id/starone"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/eye_1" />
+
+
+
+
+</GridLayout>

@@ -35,13 +35,13 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-       ViewHolder viewHolder;
+        ViewHolder viewHolder;
         if (viewType == NEW) {
             View vNew = layoutInflater.inflate(R.layout.item, parent, false);
             viewHolder = new ViewHolder(vNew);
         } else {
-             View vFavorite = layoutInflater.inflate(R.layout.mirror_item, parent, false);
-             viewHolder = new ViewHolder(vFavorite);
+            View vFavorite = layoutInflater.inflate(R.layout.mirror_item, parent, false);
+            viewHolder = new ViewHolder(vFavorite);
         }
         return viewHolder;
     }
@@ -63,17 +63,20 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView imageholder;
-        final TextView imdboneholder, imdbtwoholder, metacriticholder, nameholder;
+        final TextView imdboneholder;
+        final TextView imdbtwoholder;
+        final TextView metacriticholder;
+        final TextView nameholder;
         View root;
 
         private ViewHolder(View view) {
             super(view);
             root = view;
-            imdboneholder = view.findViewById(R.id.tvamdbone);
-            imdbtwoholder = view.findViewById(R.id.tvamdbtwo);
-            metacriticholder = view.findViewById(R.id.tvmetacritic);
-            nameholder = view.findViewById(R.id.tvname);
-            imageholder = view.findViewById(R.id.filmone);
+                imdboneholder = view.findViewById(R.id.tvamdbone);
+                imdbtwoholder = view.findViewById(R.id.tvamdbtwo);
+                metacriticholder = view.findViewById(R.id.tvmetacritic);
+                nameholder = view.findViewById(R.id.tvname);
+                imageholder = view.findViewById(R.id.filmone);
         }
     }
 }

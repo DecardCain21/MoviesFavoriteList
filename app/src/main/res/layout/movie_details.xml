@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp"
+            />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:text="xXx: Return of Xander Cage (2017)"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/poster"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_goneMarginEnd="0dp" />
+
+        <ImageView
+            android:id="@+id/poster"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@+id/title"
+            app:layout_constraintWidth_max="100dp"
+            app:srcCompat="@drawable/filmone"
+            />
+
+        <TextView
+            android:id="@+id/director_label"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:text="director_label:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintEnd_toStartOf="@id/end_guideline"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintWidth_default="wrap"
+            />
+
+        <TextView
+            android:id="@+id/director"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="director"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toStartOf="@id/poster"
+            app:layout_constraintHeight_default="wrap"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/director_label"
+            app:layout_constraintTop_toTopOf="@id/director_label"
+            app:layout_constrainedWidth="true"
+            />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/title_poster_bottom_barrier"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="poster, title"
+            tools:layout_editor_absoluteY="203dp" />
+
+        <TextView
+            android:id="@+id/short_descriptions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Movie short description:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/title_poster_bottom_barrier" />
+
+        <TextView
+            android:id="@+id/short_descriptions_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="About film aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            android:visibility="visible"
+
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/short_descriptions" />
+
+        <TextView
+            android:id="@+id/actors_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Actors label:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:visibility="visible"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toEndOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/short_descriptions_text"
+            app:layout_constraintWidth_default="wrap" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/actors"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:constraint_referenced_ids="actor_1,actor_2,actor_3,actor_4"
+            app:flow_horizontalBias="0"
+            app:flow_horizontalGap="8dp"
+            app:flow_horizontalStyle="packed"
+            app:flow_verticalGap="8dp"
+            app:flow_verticalStyle="packed"
+            app:flow_wrapMode="chain"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@+id/actions"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/actors_label" />
+
+        <TextView
+            android:id="@+id/actor_1"
+            style="@color/background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="actor_1"
+            />
+
+        <TextView
+            android:id="@+id/actor_2"
+            style="@color/background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="actor_2"
+            />
+
+        <TextView
+            android:id="@+id/actor_3"
+            style="@color/background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="actor_3"
+            />
+
+        <TextView
+            android:id="@+id/actor_4"
+            style="@color/background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="actor_4"
+            />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/actions"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="visible"
+            app:constraint_referenced_ids="like,watch,share"
+            app:flow_horizontalBias="0"
+            app:flow_horizontalGap="8dp"
+            app:flow_horizontalStyle="packed"
+            app:flow_verticalStyle="packed"
+            app:flow_wrapMode="chain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/actors"
+            app:layout_constraintWidth_default="wrap" />
+
+        <ImageButton
+            android:id="@+id/like"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/star_icon"
+            />
+
+        <ImageButton
+            android:id="@+id/watch"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/eye_1"
+            />
+
+        <ImageButton
+            android:id="@+id/share"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@android:drawable/ic_menu_set_as"
+            app:layout_goneMarginStart="0dp"
+            tools:layout_editor_absoluteX="246dp"
+            tools:layout_editor_absoluteY="350dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
