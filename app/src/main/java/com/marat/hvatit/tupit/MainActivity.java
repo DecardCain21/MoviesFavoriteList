@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         //Создание коллекции
-        FilmCollectionStore store = new FilmCollectionStore();
+        FilmCollectionStore store = FilmCollectionStore.getInstance();
         // настроить RecyclerView
         recyclerView.setLayoutManager(linearLayoutManager);
         //Получение коллекции и её данных в адаптере

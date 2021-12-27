@@ -10,7 +10,10 @@ public class FilmCollectionStore {
     //Инициализация Map для хранения коллекции фильмов
     private final Map<String, Objfilm> cacheCollection;
 
-    public FilmCollectionStore() {
+    private static volatile FilmCollectionStore instance;
+
+
+    private FilmCollectionStore() {
         //Объявление переменной
         cacheCollection = new HashMap<>();
         //Инициализация data(фильмов), с помощью генератора и интерфейса Provide
@@ -19,6 +22,17 @@ public class FilmCollectionStore {
         for (Objfilm film : collection) {
             cacheCollection.put(film.getName(), film);
         }
+    }
+
+    public static FilmCollectionStore getInstance(){
+        if(instance==null){
+            synchronized (FilmCollectionStore.class){
+                if(instance==null)
+                    instance = new FilmCollectionStore();
+            }
+            return instance;
+        }
+        return null;
     }
 
     //Метод получения конкретного фильма по filmId
