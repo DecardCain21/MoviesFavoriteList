@@ -10,8 +10,6 @@ public class FilmCollectionStore {
     //Инициализация Map для хранения коллекции фильмов
     private final Map<String, Objfilm> cacheCollection;
 
-    private static volatile FilmCollectionStore instance;
-
 
     private FilmCollectionStore() {
         //Объявление переменной
@@ -24,16 +22,15 @@ public class FilmCollectionStore {
         }
     }
 
-    public static FilmCollectionStore getInstance(){
-        if(instance==null){
-            synchronized (FilmCollectionStore.class){
-                if(instance==null)
-                    instance = new FilmCollectionStore();
-            }
-            return instance;
-        }
-        return null;
+    //Создание вложенного класса,для решения проблемы "ленивой инициализации"
+    private static class FilmCollectionStoreHolder {
+        private final static FilmCollectionStore instance = new FilmCollectionStore();
     }
+
+    public static FilmCollectionStore getInstance() {
+        return FilmCollectionStoreHolder.instance;
+    }
+
 
     //Метод получения конкретного фильма по filmId
     public Objfilm getFilm(String filmId) {
