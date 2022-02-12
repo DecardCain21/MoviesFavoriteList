@@ -46,4 +46,11 @@ public class FilmCollectionStore {
     public void putFilm(Objfilm film) {
         cacheCollection.put(film.getName(), film);
     }
+
+    @Override
+    public String toString() {
+        return "FilmCollectionStore{" +
+                "cacheCollection=" + cacheCollection +
+                '}';
+    }
 }

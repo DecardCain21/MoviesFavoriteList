@@ -2,12 +2,15 @@ package com.marat.hvatit.tupit;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,13 +21,14 @@ import android.widget.Toast;
 
 import adapter.RecycleAdapter;
 
+import com.marat.hvatit.tupit.model.DetailsFragment;
 import com.marat.hvatit.tupit.model.FilmCollectionStore;
+import com.marat.hvatit.tupit.model.Objfilm;
+import com.marat.hvatit.tupit.model.interfaces.IcreateFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IcreateFragment {
     RecycleAdapter adapter;
-    GridView gridView;
     ImageButton gridButton;
-    ArrayAdapter<String> adapterGrid;
     LinearLayoutManager linearLayoutManager;
     GridLayoutManager gridLayoutManager;
 
@@ -32,7 +36,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView recyclerView = findViewById(R.id.listoffilms);
+        Fragment fragment = new RecycleFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragmentcontainer, fragment)
+                .commit();
+        Log.e("TAG", getSupportFragmentManager().getFragments().toString());
+
+       /* RecyclerView recyclerView = findViewById(R.id.listoffilms);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         //Создание коллекции
@@ -57,7 +67,18 @@ public class MainActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                 }
             }
-        });
+        });*/
     }
 
+    @Override
+    public void someFragment(Objfilm film) {
+        Bundle bundle = new Bundle();
+        DetailsFragment detailsFragment = new DetailsFragment();
+        bundle.putParcelable("key",film);
+        detailsFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragmentcontainer, detailsFragment)
+                .commit();
+    }
 }

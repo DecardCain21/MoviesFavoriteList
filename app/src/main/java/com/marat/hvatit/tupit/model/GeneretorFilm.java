@@ -15,8 +15,7 @@ public class GeneretorFilm implements Provider<Objfilm> {
         Random random = new Random();
         ArrayList<Objfilm> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            list.add(new Objfilm("Film#" + String.valueOf(i), i, i + 1, i + 2, R.drawable.filmone));
-            list.get(i).setAnnotation("Film annotation#" + String.valueOf(i));
+            list.add(new Objfilm("Film#" + String.valueOf(i), i, i + 1, i + 2, R.drawable.filmone , String.valueOf(i),"Film annotation#" + String.valueOf(i), new String[]{"h", "u","i",String.valueOf(i)}));
             list.get(i).setFavorite(random.nextBoolean());
         }
         return list;
