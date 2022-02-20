@@ -9,6 +9,7 @@ import java.util.Map;
 public class FilmCollectionStore {
     //Инициализация Map для хранения коллекции фильмов
     private final Map<String, Objfilm> cacheCollection;
+    private static FilmCollectionStore mInstance;
 
 
     private FilmCollectionStore() {
@@ -18,7 +19,7 @@ public class FilmCollectionStore {
         List<Objfilm> collection = new GeneretorFilm().provide();
         //Внесение данных в коллекцию
         for (Objfilm film : collection) {
-            cacheCollection.put(film.getName(), film);
+            cacheCollection.put(film.getFilmId(), film);
         }
     }
 
@@ -28,7 +29,10 @@ public class FilmCollectionStore {
     }
 
     public static FilmCollectionStore getInstance() {
-        return FilmCollectionStoreHolder.instance;
+        if(mInstance==null){
+            mInstance = new FilmCollectionStore();
+        }
+        return mInstance;
     }
 
 

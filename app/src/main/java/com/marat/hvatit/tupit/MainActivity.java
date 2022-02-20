@@ -27,10 +27,6 @@ import com.marat.hvatit.tupit.model.Objfilm;
 import com.marat.hvatit.tupit.model.interfaces.IcreateFragment;
 
 public class MainActivity extends AppCompatActivity implements IcreateFragment {
-    RecycleAdapter adapter;
-    ImageButton gridButton;
-    LinearLayoutManager linearLayoutManager;
-    GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,39 +38,13 @@ public class MainActivity extends AppCompatActivity implements IcreateFragment {
                 .commit();
         Log.e("TAG", getSupportFragmentManager().getFragments().toString());
 
-       /* RecyclerView recyclerView = findViewById(R.id.listoffilms);
-        linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        gridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        //Создание коллекции
-        FilmCollectionStore store = FilmCollectionStore.getInstance();
-        // настроить RecyclerView
-        recyclerView.setLayoutManager(linearLayoutManager);
-        //Получение коллекции и её данных в адаптере
-        adapter = new RecycleAdapter(this, store.getCollection());
-        recyclerView.setAdapter(adapter);
-        gridButton = (ImageButton) findViewById(R.id.imagegrid);
-        gridButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if(recyclerView.getLayoutManager()==linearLayoutManager) {
-                    recyclerView.setLayoutManager(gridLayoutManager);
-                    recyclerView.setAdapter(adapter);
-                }
-                else{
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.setAdapter(adapter);
-                }
-            }
-        });*/
     }
 
     @Override
     public void someFragment(Objfilm film) {
         Bundle bundle = new Bundle();
         DetailsFragment detailsFragment = new DetailsFragment();
-        bundle.putParcelable("key",film);
+        bundle.putString("key",film.getFilmId());
         detailsFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)

@@ -54,19 +54,18 @@ public class RecycleFragment extends Fragment {
                 }
             }
         });
-        linearLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        gridLayoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         ImageButton gridButton = (ImageButton) getActivity().findViewById(R.id.imagegrid);
         gridButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (recyclerView.getLayoutManager() == linearLayoutManager) {
                     recyclerView.setLayoutManager(gridLayoutManager);
-                    recyclerView.setAdapter(adapter);
                 } else {
                     recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.setAdapter(adapter);
                 }
+                recyclerView.setAdapter(adapter);
             }
         });
         linearLayoutManager = new LinearLayoutManager(getContext());

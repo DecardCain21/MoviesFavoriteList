@@ -33,6 +33,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
 
     @Override
     public int getItemViewType(int position) {
+
         return (objfilmslist.get(position).isFavorite()) ? NEW : FAVORITE;
     }
 
@@ -83,6 +84,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         final TextView metacriticholder;
         final TextView nameholder;
         View root;
+
 
         private ViewHolder(View view) {
             super(view);
