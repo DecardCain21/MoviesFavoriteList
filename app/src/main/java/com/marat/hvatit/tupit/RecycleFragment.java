@@ -39,7 +39,7 @@ public class RecycleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
         recyclerView = view.findViewById(R.id.vrecyclefragment);
-        adapter = new RecycleAdapter(getContext(), store.getCollection(), new RecycleAdapter.ItemClickListener() {
+        adapter = new RecycleAdapter(getContext(), new RecycleAdapter.ItemClickListener() {
             @Override
             public void onItemClick(Objfilm objfilm) {
                 if (objfilm != null) {
@@ -54,6 +54,7 @@ public class RecycleFragment extends Fragment {
                 }
             }
         });
+        adapter.update(store.getCollection());
         linearLayoutManager = new LinearLayoutManager(getContext());
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         ImageButton gridButton = (ImageButton) getActivity().findViewById(R.id.imagegrid);
@@ -65,7 +66,7 @@ public class RecycleFragment extends Fragment {
                 } else {
                     recyclerView.setLayoutManager(linearLayoutManager);
                 }
-                recyclerView.setAdapter(adapter);
+               adapter.update(store.getCollection());
             }
         });
         linearLayoutManager = new LinearLayoutManager(getContext());

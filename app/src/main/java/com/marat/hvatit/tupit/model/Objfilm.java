@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.TextView;
 
-public class Objfilm implements Parcelable {
+import com.marat.hvatit.tupit.model.interfaces.RowType;
+
+public class Objfilm implements RowType {
     //Создание переменных класса
 
     //Название фильма
@@ -23,7 +25,7 @@ public class Objfilm implements Parcelable {
     private String[] acters;
 
     public String getActers(int position) {
-        return acters [position];
+        return acters[position];
     }
 
     //Создание Id объекта фильм
@@ -43,24 +45,11 @@ public class Objfilm implements Parcelable {
         image = in.readInt();
     }
 
-    public static final Creator<Objfilm> CREATOR = new Creator<Objfilm>() {
-        @Override
-        public Objfilm createFromParcel(Parcel in) {
-            return new Objfilm(in);
-        }
-
-        @Override
-        public Objfilm[] newArray(int size) {
-            return new Objfilm[size];
-        }
-    };
-
 
     //создание флажка
     private boolean favorite;
-    public static int NEW = 1;
-    public static int FAVORITE = 2;
-    public static int GRID = 3;
+
+    private int filmType;
 
 
     //public method for Provider
@@ -77,7 +66,7 @@ public class Objfilm implements Parcelable {
     private int image;
 
     //Создание Конструктора
-    public Objfilm(String name, int imdbone, int imdbtwo, int metacritic, int image ,String filmId,String annotation,String [] acters) {
+    public Objfilm(String name, int imdbone, int imdbtwo, int metacritic, int image, String filmId, String annotation, String[] acters) {
         this.name = name;
         this.imdbone = imdbone;
         this.imdbtwo = imdbtwo;
@@ -132,10 +121,6 @@ public class Objfilm implements Parcelable {
         return this.metacritic;
     }
 
-    public int getType() {
-        return isFavorite() ? NEW : FAVORITE;
-    }
-
     public String getFilmId() {
         return filmId;
     }
@@ -152,20 +137,25 @@ public class Objfilm implements Parcelable {
         return annotation;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    //Тестовая типизация объекта
+
+    public int getFilmType() {
+        if(filmType==GRID_ROW_TYPE){
+            return 3;
+        }
+        if(filmType==NEW_ROW_TYPE){
+            return 2;
+        }
+        if(filmType==FAVORITE_ROW_TYPE){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeInt(imdbone);
-        dest.writeInt(imdbtwo);
-        dest.writeInt(metacritic);
-        dest.writeString(filmId);
-        dest.writeString(annotation);
-        dest.writeByte((byte) (favorite ? 1 : 0));
-        dest.writeInt(image);
+    public void setFilmType(int filmType) {
+        this.filmType = filmType;
     }
+
 }

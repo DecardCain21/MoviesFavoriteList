@@ -35,7 +35,6 @@ public class FilmCollectionStore {
         return mInstance;
     }
 
-
     //Метод получения конкретного фильма по filmId
     public Objfilm getFilm(String filmId) {
         return cacheCollection.get(filmId);
@@ -50,6 +49,14 @@ public class FilmCollectionStore {
     public void putFilm(Objfilm film) {
         cacheCollection.put(film.getName(), film);
     }
+
+    //Установление параметра GRID для коллекции
+    public void setGrid(FilmCollectionStore store){
+        for(Objfilm store1: getCollection()){
+            store1.setFilmType(2);
+        }
+    }
+
 
     @Override
     public String toString() {

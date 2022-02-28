@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,56 +14,69 @@ import com.marat.hvatit.tupit.R;
 import com.marat.hvatit.tupit.model.Objfilm;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static com.marat.hvatit.tupit.model.Objfilm.FAVORITE;
-import static com.marat.hvatit.tupit.model.Objfilm.GRID;
-import static com.marat.hvatit.tupit.model.Objfilm.NEW;
+import static com.marat.hvatit.tupit.model.interfaces.RowType.FAVORITE_ROW_TYPE;
+import static com.marat.hvatit.tupit.model.interfaces.RowType.GRID_ROW_TYPE;
+import static com.marat.hvatit.tupit.model.interfaces.RowType.NEW_ROW_TYPE;
 
 public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
-    ArrayList<Objfilm> objfilmslist;
+    private List<Objfilm> objfilmslist = new ArrayList<>();
     LayoutInflater layoutInflater;
     private ItemClickListener onItemClickListener;
 
-    public RecycleAdapter(Context context, ArrayList<Objfilm> listfilms, ItemClickListener itemClickListener) {
+
+    public RecycleAdapter(Context context, ItemClickListener itemClickListener) {
         this.layoutInflater = LayoutInflater.from(context);
-        this.objfilmslist = listfilms;
         this.onItemClickListener = itemClickListener;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return (objfilmslist.get(position).isFavorite()) ? NEW : FAVORITE;
+        if (objfilmslist.get(position).getFilmType() == GRID_ROW_TYPE) {
+            return GRID_ROW_TYPE;
+        }
+        if (objfilmslist.get(position).getFilmType() == NEW_ROW_TYPE) {
+            return NEW_ROW_TYPE;
+        }
+        if (objfilmslist.get(position).getFilmType() == FAVORITE_ROW_TYPE) {
+            return FAVORITE_ROW_TYPE;
+        } else {
+            return 0;
+        }
+        //return (objfilmslist.get(position).isFavorite()) ? NEW : FAVORITE;
     }
+
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewHolder viewHolder;
-        if (viewType == GRID) {
-            View vGrid = layoutInflater.inflate(R.layout.filmonegradienttest, parent, false);
-            viewHolder = new ViewHolder(vGrid);
-        }
-        if (viewType == NEW) {
+    public RecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == GRID_ROW_TYPE) {
+            View vGrid = layoutInflater.from(parent.getContext()).inflate(R.layout.filmonegradienttest, parent, false);
+            return new ViewHolderGrid(vGrid);
+        } else if (viewType == NEW) {
             View vNew = layoutInflater.inflate(R.layout.item, parent, false);
             viewHolder = new ViewHolder(vNew);
         } else {
             View vFavorite = layoutInflater.inflate(R.layout.mirror_item, parent, false);
             viewHolder = new ViewHolder(vFavorite);
         }
-        return viewHolder;
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(RecycleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecycleAdapter.ViewHolder holder, int position) {
         final Objfilm film = objfilmslist.get(position);
-        holder.itemView.setOnClickListener(view -> {
-            onItemClickListener.onItemClick(objfilmslist.get(position));
-        });
-        holder.nameholder.setText(film.getName());
-        holder.imdboneholder.setText(String.valueOf(film.getimdbone()));
-        holder.imdbtwoholder.setText(String.valueOf(film.getimdbtwo()));
-        holder.metacriticholder.setText(String.valueOf(film.getmetacritic()));
-        holder.imageholder.setImageResource(film.getImage());
+        if(holder instanceof ViewHolder) {
+            holder.bindView(film, onItemClickListener);
+        }
+
+
+    }
+
+    public void update(List<Objfilm> list) {
+        this.objfilmslist = list;
+        notifyDataSetChanged();
     }
 
     public interface ItemClickListener {
@@ -76,12 +88,34 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         return objfilmslist.size();
     }
 
+    public static class ViewHolderGrid extends RecyclerView.ViewHolder {
+        final ImageView imageView;
+        final TextView nameholder;
+        View root;
+
+        public ViewHolderGrid(View view) {
+            super(view);
+
+            root = itemView;
+            imageView = view.findViewById(R.id.filmone);
+            nameholder = view.findViewById(R.id.gridtvname);
+        }
+
+        public void bindView(Objfilm objfilm, ItemClickListener itemClickListener) {
+            itemView.setOnClickListener(view -> {
+                itemClickListener.onItemClick(objfilm);
+            });
+            nameholder.setText(objfilm.getName());
+            imageView.setImageResource(objfilm.getImage());
+        }
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-         ImageView imageholder;
-         TextView imdboneholder;
-         TextView imdbtwoholder;
-         TextView metacriticholder;
-         TextView nameholder;
+        final ImageView imageholder;
+        final TextView imdboneholder;
+        final TextView imdbtwoholder;
+        final TextView metacriticholder;
+        final TextView nameholder;
         View root;
 
 
@@ -94,6 +128,17 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
             metacriticholder = view.findViewById(R.id.tvmetacritic);
             nameholder = view.findViewById(R.id.tvname);
             imageholder = view.findViewById(R.id.filmone);
+        }
+
+        public void bindView(Objfilm objfilm, ItemClickListener itemClickListener) {
+            itemView.setOnClickListener(view -> {
+                itemClickListener.onItemClick(objfilm);
+            });
+            nameholder.setText(objfilm.getName());
+            imdboneholder.setText(String.valueOf(objfilm.getimdbone()));
+            imdbtwoholder.setText(String.valueOf(objfilm.getimdbtwo()));
+            metacriticholder.setText(String.valueOf(objfilm.getmetacritic()));
+            imageholder.setImageResource(objfilm.getImage());
         }
     }
 }
