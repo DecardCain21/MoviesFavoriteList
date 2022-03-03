@@ -62,8 +62,10 @@ public class RecycleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (recyclerView.getLayoutManager() == linearLayoutManager) {
+                    store.setGrid();
                     recyclerView.setLayoutManager(gridLayoutManager);
                 } else {
+                    store.setUngrid();
                     recyclerView.setLayoutManager(linearLayoutManager);
                 }
                adapter.update(store.getCollection());

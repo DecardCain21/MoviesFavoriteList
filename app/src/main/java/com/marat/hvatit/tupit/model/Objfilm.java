@@ -141,13 +141,13 @@ public class Objfilm implements RowType {
 
     public int getFilmType() {
         if(filmType==GRID_ROW_TYPE){
-            return 3;
-        }
-        if(filmType==NEW_ROW_TYPE){
             return 2;
         }
-        if(filmType==FAVORITE_ROW_TYPE){
+        if(filmType==NEW_ROW_TYPE){
             return 1;
+        }
+        if(filmType==FAVORITE_ROW_TYPE){
+            return 0;
         }
         else{
             return 0;

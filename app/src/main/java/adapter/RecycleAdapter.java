@@ -20,7 +20,7 @@ import static com.marat.hvatit.tupit.model.interfaces.RowType.FAVORITE_ROW_TYPE;
 import static com.marat.hvatit.tupit.model.interfaces.RowType.GRID_ROW_TYPE;
 import static com.marat.hvatit.tupit.model.interfaces.RowType.NEW_ROW_TYPE;
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHolder> {
+public class RecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Objfilm> objfilmslist = new ArrayList<>();
     LayoutInflater layoutInflater;
     private ItemClickListener onItemClickListener;
@@ -44,35 +44,37 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         } else {
             return 0;
         }
-        //return (objfilmslist.get(position).isFavorite()) ? NEW : FAVORITE;
     }
 
 
     @NonNull
     @Override
-    public RecycleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        RecyclerView.ViewHolder vh;
         if (viewType == GRID_ROW_TYPE) {
-            View vGrid = layoutInflater.from(parent.getContext()).inflate(R.layout.filmonegradienttest, parent, false);
-            return new ViewHolderGrid(vGrid);
-        } else if (viewType == NEW) {
+            View vGrid = layoutInflater.inflate(R.layout.filmonegradienttest, parent, false);
+            vh = new ViewHolderGrid(vGrid);
+        } else if (viewType == NEW_ROW_TYPE) {
             View vNew = layoutInflater.inflate(R.layout.item, parent, false);
-            viewHolder = new ViewHolder(vNew);
+            vh = new ViewHolder(vNew);
         } else {
             View vFavorite = layoutInflater.inflate(R.layout.mirror_item, parent, false);
-            viewHolder = new ViewHolder(vFavorite);
+            vh = new ViewHolder(vFavorite);
         }
-        return null;
+        return vh;
     }
 
     @Override
-    public void onBindViewHolder(final RecycleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final Objfilm film = objfilmslist.get(position);
         if(holder instanceof ViewHolder) {
-            holder.bindView(film, onItemClickListener);
+            ((ViewHolder)holder).bindView(film, onItemClickListener);
         }
-
-
+        if(holder instanceof ViewHolderGrid){
+            ((ViewHolderGrid)holder).bindView(film,onItemClickListener);
+        }
     }
+
 
     public void update(List<Objfilm> list) {
         this.objfilmslist = list;
@@ -96,9 +98,9 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.ViewHold
         public ViewHolderGrid(View view) {
             super(view);
 
-            root = itemView;
+            root = view;
             imageView = view.findViewById(R.id.filmone);
-            nameholder = view.findViewById(R.id.gridtvname);
+            nameholder = view.findViewById(R.id.tvname);
         }
 
         public void bindView(Objfilm objfilm, ItemClickListener itemClickListener) {

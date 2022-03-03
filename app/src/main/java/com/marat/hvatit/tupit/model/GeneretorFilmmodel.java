@@ -1,7 +1,7 @@
 package com.marat.hvatit.tupit.model;
 
-import com.marat.hvatit.tupit.R;
 import com.marat.hvatit.tupit.model.interfaces.Provider;
+import com.marat.hvatit.tupit.model.models.Filmmodel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class GeneretorFilmmodel implements Provider<Filmmodel> {
         Random random = new Random();
         ArrayList<Filmmodel> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            list.add(new FilmBuilderIMp().setTitle("Film#" + String.valueOf(i)).setId(i).setPopularity(i + 10).setVideo(random.nextBoolean()).build());
+            //list.add(new Filmmodel(.setTitle("Film#" + String.valueOf(i)).setId(i).setPopularity(i + 10).setVideo(random.nextBoolean()).build());
         }
         return list;
     }

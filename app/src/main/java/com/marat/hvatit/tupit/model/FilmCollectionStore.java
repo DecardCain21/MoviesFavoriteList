@@ -10,6 +10,7 @@ public class FilmCollectionStore {
     //Инициализация Map для хранения коллекции фильмов
     private final Map<String, Objfilm> cacheCollection;
     private static FilmCollectionStore mInstance;
+    private ArrayList<Integer> filmTypeList = new ArrayList<>();
 
 
     private FilmCollectionStore() {
@@ -29,7 +30,7 @@ public class FilmCollectionStore {
     }
 
     public static FilmCollectionStore getInstance() {
-        if(mInstance==null){
+        if (mInstance == null) {
             mInstance = new FilmCollectionStore();
         }
         return mInstance;
@@ -51,9 +52,20 @@ public class FilmCollectionStore {
     }
 
     //Установление параметра GRID для коллекции
-    public void setGrid(FilmCollectionStore store){
-        for(Objfilm store1: getCollection()){
+    public void setGrid() {
+
+        for (Objfilm store1 : cacheCollection.values()) {
+            getInstance().filmTypeList.add(store1.getFilmType());
             store1.setFilmType(2);
+        }
+    }
+
+    //Костыльная реализация
+    public void setUngrid() {
+        int i = 0;
+        for (Objfilm store1 : cacheCollection.values()) {
+            store1.setFilmType(getInstance().filmTypeList.get(i));
+            i++;
         }
     }
 
