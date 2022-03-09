@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity implements IcreateFragment {
 
     @Override
     public void someFragment(Objfilm film) {
+        //Обратиться к коллекции и чуть ли не руками снимаем параметр "grid" в ней
+        /*FilmCollectionStore filmCollectionStore = FilmCollectionStore.getInstance();
+        filmCollectionStore.setUngrid();*/
         Bundle bundle = new Bundle();
         DetailsFragment detailsFragment = new DetailsFragment();
         bundle.putString("key",film.getFilmId());

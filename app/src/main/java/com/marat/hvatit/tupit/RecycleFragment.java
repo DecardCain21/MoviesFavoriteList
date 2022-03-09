@@ -3,6 +3,8 @@ package com.marat.hvatit.tupit;
 import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,16 +44,15 @@ public class RecycleFragment extends Fragment {
         adapter = new RecycleAdapter(getContext(), new RecycleAdapter.ItemClickListener() {
             @Override
             public void onItemClick(Objfilm objfilm) {
-                if (objfilm != null) {
-                    Log.e("This is objfilm", objfilm.getFilmId());
-                }
+                //Ставим костыль ВОТ СЮДА,чтобы при возвращении не увидеть изврат
+                store.setUngrid();
                 Activity activity = requireActivity();
                 try {
-
                     ((IcreateFragment) activity).someFragment(objfilm);
                 } catch (Exception e) {
                     Log.e("Tag", "ERROR");
                 }
+
             }
         });
         adapter.update(store.getCollection());
@@ -71,7 +72,6 @@ public class RecycleFragment extends Fragment {
                adapter.update(store.getCollection());
             }
         });
-        linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
         return view;
