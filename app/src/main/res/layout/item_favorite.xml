@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/background"
+    android:paddingStart="16dp"
+    android:paddingTop="3dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="3dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/filmone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        tools:src="@drawable/filmone" />
+
+    <!--для поддержки на старых телефонах используется класс AppCompatTextView,класс для обратной совместимости,тег "app" для библиотеки-->
+    <TextView
+        android:id="@+id/tvname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/separator_middle"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/filmone"
+        android:lineSpacingExtra="-9.5sp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="normal"
+        android:fontFamily="@font/myriad_pro"
+        tools:text="xXx: Return of Xander Cage (2017)" />
+    <!--fontFamily метод поддерживается с 8 версии андроида-->
+
+    <View
+        android:id="@+id/separator_middle"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:background="@color/background" />
+
+    <ImageButton
+        android:id="@+id/starone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="3dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/shape_1_copy" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/eyeone"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_toStartOf="@id/starone"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/eye_1" />
+
+    <LinearLayout
+        android:layout_width="210dp"
+        android:layout_height="16.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@id/filmone"
+
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivimdbone"
+            android:layout_width="34.5dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/download" />
+
+        <TextView
+            android:id="@+id/tvamdbone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="9.3dp"
+            android:text="7.2"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/ivimdbtwo"
+            android:layout_width="34.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            app:srcCompat="@drawable/download_copy" />
+
+        <TextView
+            android:id="@+id/tvamdbtwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="9dp"
+            android:text="9.1"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+        <ImageView
+            android:id="@+id/ivmetacritic"
+            android:layout_width="16.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21.5dp"
+            app:srcCompat="@drawable/metacritic_svg" />
+
+        <TextView
+            android:id="@+id/tvmetacritic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="7.3dp"
+            android:text="8.3"
+            android:textColor="@color/white"
+            android:textSize="10sp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

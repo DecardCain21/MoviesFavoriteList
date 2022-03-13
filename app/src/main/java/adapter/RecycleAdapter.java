@@ -58,7 +58,7 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             View vNew = layoutInflater.inflate(R.layout.item, parent, false);
             vh = new ViewHolder(vNew);
         } else {
-            View vFavorite = layoutInflater.inflate(R.layout.mirror_item, parent, false);
+            View vFavorite = layoutInflater.inflate(R.layout.item_favorite, parent, false);
             vh = new ViewHolder(vFavorite);
         }
         return vh;

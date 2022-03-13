@@ -19,6 +19,7 @@ import android.widget.ImageButton;
 import com.marat.hvatit.tupit.model.FilmCollectionStore;
 import com.marat.hvatit.tupit.model.Objfilm;
 import com.marat.hvatit.tupit.model.interfaces.IcreateFragment;
+import com.marat.hvatit.tupit.model.interfaces.RowType;
 
 import adapter.RecycleAdapter;
 
@@ -45,7 +46,9 @@ public class RecycleFragment extends Fragment {
             @Override
             public void onItemClick(Objfilm objfilm) {
                 //Ставим костыль ВОТ СЮДА,чтобы при возвращении не увидеть изврат
-                store.setUngrid();
+                if(objfilm.getFilmType()== RowType.GRID_ROW_TYPE) {
+                    store.setUngrid();
+                }
                 Activity activity = requireActivity();
                 try {
                     ((IcreateFragment) activity).someFragment(objfilm);
