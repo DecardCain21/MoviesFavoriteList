@@ -20,30 +20,26 @@ import static com.marat.hvatit.tupit.model.interfaces.RowType.FAVORITE_ROW_TYPE;
 import static com.marat.hvatit.tupit.model.interfaces.RowType.GRID_ROW_TYPE;
 import static com.marat.hvatit.tupit.model.interfaces.RowType.NEW_ROW_TYPE;
 
-public class RecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class FilmListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Objfilm> objfilmslist = new ArrayList<>();
     LayoutInflater layoutInflater;
     private ItemClickListener onItemClickListener;
+    //private boolean isGrid = false;
 
 
-    public RecycleAdapter(Context context, ItemClickListener itemClickListener) {
+    public FilmListAdapter(Context context,List<Objfilm> objfilmslist, ItemClickListener itemClickListener) {
         this.layoutInflater = LayoutInflater.from(context);
         this.onItemClickListener = itemClickListener;
+        this.objfilmslist = objfilmslist;
     }
+
+    /*public void setGrid(boolean isGrid){
+        this.isGrid = isGrid;
+    }*/
 
     @Override
     public int getItemViewType(int position) {
-        if (objfilmslist.get(position).getFilmType() == GRID_ROW_TYPE) {
-            return GRID_ROW_TYPE;
-        }
-        if (objfilmslist.get(position).getFilmType() == NEW_ROW_TYPE) {
-            return NEW_ROW_TYPE;
-        }
-        if (objfilmslist.get(position).getFilmType() == FAVORITE_ROW_TYPE) {
-            return FAVORITE_ROW_TYPE;
-        } else {
-            return 0;
-        }
+        return 0;
     }
 
 
@@ -51,34 +47,17 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        if (viewType == GRID_ROW_TYPE) {
-            View vGrid = layoutInflater.inflate(R.layout.filmonegradienttest, parent, false);
-            vh = new ViewHolderGrid(vGrid);
-        } else if (viewType == NEW_ROW_TYPE) {
-            View vNew = layoutInflater.inflate(R.layout.item, parent, false);
-            vh = new ViewHolder(vNew);
-        } else {
-            View vFavorite = layoutInflater.inflate(R.layout.item_favorite, parent, false);
-            vh = new ViewHolder(vFavorite);
-        }
+        View vNew = layoutInflater.inflate(R.layout.item, parent, false);
+        vh = new ViewHolder(vNew);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final Objfilm film = objfilmslist.get(position);
-        if(holder instanceof ViewHolder) {
-            ((ViewHolder)holder).bindView(film, onItemClickListener);
+        if (holder instanceof ViewHolder) {
+            ((ViewHolder) holder).bindView(film, onItemClickListener);
         }
-        if(holder instanceof ViewHolderGrid){
-            ((ViewHolderGrid)holder).bindView(film,onItemClickListener);
-        }
-    }
-
-
-    public void update(List<Objfilm> list) {
-        this.objfilmslist = list;
-        notifyDataSetChanged();
     }
 
     public interface ItemClickListener {
@@ -90,27 +69,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return objfilmslist.size();
     }
 
-    public static class ViewHolderGrid extends RecyclerView.ViewHolder {
-        final ImageView imageView;
-        final TextView nameholder;
-        View root;
-
-        public ViewHolderGrid(View view) {
-            super(view);
-
-            root = view;
-            imageView = view.findViewById(R.id.filmone);
-            nameholder = view.findViewById(R.id.tvname);
-        }
-
-        public void bindView(Objfilm objfilm, ItemClickListener itemClickListener) {
-            itemView.setOnClickListener(view -> {
-                itemClickListener.onItemClick(objfilm);
-            });
-            nameholder.setText(objfilm.getName());
-            imageView.setImageResource(objfilm.getImage());
-        }
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView imageholder;
