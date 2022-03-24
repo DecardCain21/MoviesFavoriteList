@@ -31,8 +31,8 @@ public class RecycleFragment extends Fragment {
     FilmGridAdapter filmGridAdapter;
     //Create RecyclerView...........
     RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());;
-    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);;
+    LinearLayoutManager linearLayoutManager;
+    GridLayoutManager gridLayoutManager;
     //Костыли................................
     private RecyclerView.Adapter savedState = null;
     private RecyclerView.LayoutManager savelayoutManager = null;
@@ -63,6 +63,8 @@ public class RecycleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recycle, container, false);
         recyclerView = view.findViewById(R.id.vrecyclefragment);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
         //Adapter`s..................................................
         filmListAdapter = new FilmListAdapter(getContext(), store.getCollection(), new FilmListAdapter.ItemClickListener() {
             @Override
