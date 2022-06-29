@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import com.marat.hvatit.tupit.model.Objfilm;
 
 public class FilmsAdapter extends BaseAdapter {
-    //Какого хуя тут делает контекст,и почему так?
     Context ctx;
     //Создание массива данных,для понимания с чем работать адаптеру
     ArrayList<Objfilm> objfilmslist;
@@ -26,8 +25,6 @@ public class FilmsAdapter extends BaseAdapter {
     public FilmsAdapter(Context context, ArrayList<Objfilm> products) {
         ctx = context;
         objfilmslist = products;
-        //хуй знает что он делает,но делает(использует getView,каким-то образом)
-        //вызывается извне Activity,вместе с контекстом(?)
         layoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }

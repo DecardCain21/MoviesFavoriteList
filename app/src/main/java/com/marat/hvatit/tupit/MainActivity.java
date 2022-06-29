@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity implements IcreateFragment {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Fragment fragment = new RecycleFragment();
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .add(R.id.fragmentcontainer, fragment)
                 .commit();
         Log.e("TAG", getSupportFragmentManager().getFragments().toString());
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements IcreateFragment {
         DetailsFragment detailsFragment = new DetailsFragment();
         bundle.putString("key", film.getFilmId());
         detailsFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragmentcontainer, detailsFragment)
                 .commit();
