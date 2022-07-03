@@ -21,11 +21,11 @@ import static com.marat.hvatit.tupit.model.interfaces.RowType.GRID_ROW_TYPE;
 public class FilmGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Objfilm> objfilmslist = new ArrayList<>();
     LayoutInflater layoutInflater;
-    private FilmListAdapter.ItemClickListener onItemClickListener;
+    private ItemClickListener onItemClickListener;
     //private boolean isUngrid = true;
 
 
-    public FilmGridAdapter(Context context, List<Objfilm> objfilmslist, FilmListAdapter.ItemClickListener itemClickListener) {
+    public FilmGridAdapter(Context context, List<Objfilm> objfilmslist, ItemClickListener itemClickListener) {
         this.layoutInflater = LayoutInflater.from(context);
         this.onItemClickListener = itemClickListener;
         this.objfilmslist = objfilmslist;
@@ -37,21 +37,21 @@ public class FilmGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        return 0;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder vh = null;
+        RecyclerView.ViewHolder vh;
         View vGrid = layoutInflater.inflate(R.layout.filmonegradienttest, parent, false);
         vh = new FilmGridAdapter.ViewHolderGrid(vGrid);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final Objfilm film = objfilmslist.get(position);
-        if (holder instanceof FilmGridAdapter.ViewHolderGrid) {
+        if (holder instanceof ViewHolderGrid) {
             ((ViewHolderGrid) holder).bindView(film, onItemClickListener);
         }
     }
@@ -59,6 +59,10 @@ public class FilmGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemCount() {
         return objfilmslist.size();
+    }
+
+    public interface ItemClickListener {
+        void onItemClick(Objfilm objfilm);
     }
 
 
@@ -69,13 +73,12 @@ public class FilmGridAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public ViewHolderGrid(View view) {
             super(view);
-
             root = view;
-            imageView = view.findViewById(R.id.filmone);
+            imageView = view.findViewById(R.id.filmonexy);
             nameholder = view.findViewById(R.id.tvname);
         }
 
-        public void bindView(Objfilm objfilm, FilmListAdapter.ItemClickListener itemClickListener) {
+        public void bindView(Objfilm objfilm, ItemClickListener itemClickListener) {
             itemView.setOnClickListener(view -> {
                 itemClickListener.onItemClick(objfilm);
             });

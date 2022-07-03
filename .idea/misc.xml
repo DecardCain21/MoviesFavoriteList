@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/MoviesFavoriteList/app/src/main/res/drawable/shape.xml" value="0.131" />
+        <entry key="..\:/Android/MoviesFavoriteList/app/src/main/res/layout/filmonegradienttest.xml" value="0.16847826086956522" />
+        <entry key="..\:/Android/MoviesFavoriteList/app/src/main/res/layout/toolbar.xml" value="0.1641337386018237" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />
