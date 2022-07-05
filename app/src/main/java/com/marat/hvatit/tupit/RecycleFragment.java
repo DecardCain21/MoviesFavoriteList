@@ -97,8 +97,6 @@ public class RecycleFragment extends Fragment {
                 recyclerView.setLayoutManager(gridLayoutManager);
                 recyclerView.setAdapter(filmGridAdapter);
                 break;
-            default:
-                break;
         }
         return view;
     }
