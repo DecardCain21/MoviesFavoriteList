@@ -31,28 +31,14 @@ public class RecycleFragment extends Fragment {
     FilmGridAdapter filmGridAdapter;
     //Create RecyclerView...........
     RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-    GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+    LinearLayoutManager linearLayoutManager;
+    GridLayoutManager gridLayoutManager;
     String manager_type = "linear";
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
-            manager_type = savedInstanceState.getString("manager_type");
-            switch (manager_type) {
-                case "linear":
-                    recyclerView.setLayoutManager(linearLayoutManager);
-                    recyclerView.setAdapter(filmListAdapter);
-                    break;
-                case "grid":
-                    recyclerView.setLayoutManager(gridLayoutManager);
-                    recyclerView.setAdapter(filmGridAdapter);
-            }
-        } else {
-            manager_type = "linear";
-        }
     }
 
     public void onButtonClick() {
@@ -65,8 +51,6 @@ public class RecycleFragment extends Fragment {
             recyclerView.setAdapter(filmListAdapter);
             manager_type = "linear";
         }
-
-
         filmListAdapter.notifyDataSetChanged();
     }
 
@@ -87,7 +71,6 @@ public class RecycleFragment extends Fragment {
                 } catch (Exception e) {
                     Log.e("Tag", "ERROR of filmListAdapter");
                 }
-
             }
         });
         filmGridAdapter = new FilmGridAdapter(getContext(), store.getCollection(), new FilmGridAdapter.ItemClickListener() {
@@ -102,9 +85,21 @@ public class RecycleFragment extends Fragment {
             }
         });
         //Базово стоит linearLayoutManager и FilmListAdapter
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(filmListAdapter);
+        if (savedInstanceState != null) {
+            manager_type = savedInstanceState.getString("manager_type");
+        }
+        switch (manager_type) {
+            case "linear":
+                recyclerView.setLayoutManager(linearLayoutManager);
+                recyclerView.setAdapter(filmListAdapter);
+                break;
+            case "grid":
+                recyclerView.setLayoutManager(gridLayoutManager);
+                recyclerView.setAdapter(filmGridAdapter);
+                break;
+            default:
+                break;
+        }
         return view;
     }
 
@@ -113,4 +108,5 @@ public class RecycleFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putString("manager_type", manager_type);
     }
+
 }
